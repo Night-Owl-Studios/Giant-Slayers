@@ -26,7 +26,7 @@ enum class deckType {
 ******************************************************************************/
 class deck {
     private:
-        unsigned numCardsLeft = 0;
+        unsigned drawOffset = 0;
         card** pCards = nullptr; // Array of 50 cards
         
     public:
@@ -46,12 +46,12 @@ class deck {
         virtual void        applySpecialAbility () = 0;
         virtual deckType    getDeckType         () const = 0;
         
-        unsigned            getNumCardsLeft     () { return numCardsLeft; }
+        unsigned            getNumCardsLeft     () { return _MAX_CARDS_PER_DECK-drawOffset; }
         
         void                shuffle             ();
         
         // Overloading the subscript operator might get confusing
-        card*               useCard             (unsigned index); // decrements numCardsLeft
+        card*               pullCard            (); // increments numCardsLeft
         card*               getCard             (unsigned index) const;
 };
 

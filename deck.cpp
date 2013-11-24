@@ -56,7 +56,7 @@ deck& deck::operator =(const deck& cd) {
         }
     }
     
-    numCardsLeft = cd.numCardsLeft;
+    drawOffset = cd.drawOffset;
     return *this;
 }
 
@@ -65,8 +65,8 @@ deck& deck::operator =(deck&& cd) {
         terminate();
     }
     
-    numCardsLeft = cd.numCardsLeft;
-    cd.numCardsLeft = 0;
+    drawOffset = cd.drawOffset;
+    cd.drawOffset = 0;
     
     pCards = cd.pCards;
     cd.pCards = nullptr;
@@ -110,6 +110,8 @@ void deck::terminate() {
         delete [] pCards;
         pCards = nullptr;
     }
+    
+    drawOffset = 0;
 }
 
 /******************************************************************************
@@ -127,19 +129,16 @@ void deck::shuffle() {
         pCards[i] = pCards[randIndex];
         pCards[randIndex] = currentCard;
     }
+    
+    drawOffset = 0;
 }
 
 /******************************************************************************
  * Card Deck Data Acquisition
 ******************************************************************************/
-card* deck::useCard(unsigned index) {
-    #ifdef _DEBUG
-        HL_ASSERT(index < _MAX_CARDS_PER_DECK);
-    #endif
-    
-    if (pCards) {
-        numCardsLeft -= 1;
-        return pCards[index];
+card* deck::pullCard() {
+    if (pCards && drawOffset != _MAX_CARDS_PER_DECK) {
+        return pCards[drawOffset++];
     }
     
     return nullptr;
