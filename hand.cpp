@@ -51,18 +51,7 @@ bool hand::selectCard(unsigned index) {
         HL_ASSERT(cards[index].pCard != nullptr);
     #endif
     
-    unsigned numActiveCards = 0;
-    for (unsigned i = 0; i < _MAX_CARDS_PER_HAND; ++i) {
-        if (cards[i].isActive == true && numActiveCards  < _MAX_CARDS_PER_HAND) {
-            ++numActiveCards;
-        }
-        else {
-            return false;
-        }
-    }
-    
-    cards[index].isActive = true;
-    return true;
+    return cards[index].isActive = true;
 }
 
 /******************************************************************************
@@ -97,6 +86,9 @@ void hand::getSelectedCards(card* cardArray[_MAX_CARDS_PER_HAND]) {
  * Hand - Card Acquisition
 ******************************************************************************/
 void hand::getCards(card* cardArray[_MAX_CARDS_PER_HAND]) {
+    unsigned i = 0;
+    unsigned j = 0;
+    unsigned k = _MAX_CARDS_PER_HAND-1;
     
     while (i <= k) {
         cards[i].pCard != nullptr
@@ -139,7 +131,7 @@ unsigned hand::drawCards(deck* d, unsigned numCards) {
     #endif
     
     if (!numCards) {
-        break;
+        return 0;
     }
     
     unsigned cardsDrawn = 0;
