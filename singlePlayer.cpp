@@ -5,15 +5,10 @@
  * Created on November 21, 2013, 8:14 PM
  */
 
+#include <utility>
 #include "singlePlayer.h"
 
 singlePlayer::singlePlayer() {
-}
-
-singlePlayer::singlePlayer(const singlePlayer&) {
-}
-
-singlePlayer::singlePlayer(singlePlayer&&) {
 }
 
 singlePlayer::~singlePlayer() {
@@ -102,7 +97,10 @@ void singlePlayer::stepGameLogic() {
      */
 }
 
-void singlePlayer::tick(float tickTime) {
+void singlePlayer::draw() const {
+}
+
+void singlePlayer::onTick(float tickTime) {
     (void)tickTime;
     /*
      * stepGameLogic()

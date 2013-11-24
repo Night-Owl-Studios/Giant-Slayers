@@ -19,22 +19,22 @@ class singlePlayer : virtual public gameState {
         player* currentPlayer   = nullptr;
         deck* pDeck             = nullptr;
         
-        void    onKeyboardUpEvent   (const SDL_KeyboardEvent*);
-        void    onKeyboardDownEvent (const SDL_KeyboardEvent*);
-        void    onWindowEvent       (const SDL_WindowEvent*);
-        void    onMouseMoveEvent    (const SDL_MouseMotionEvent*);
-        void    onMouseButtonEvent  (const SDL_MouseButtonEvent*);
-        void    onMouseWheelEvent   (const SDL_MouseWheelEvent*);
+        void    onKeyboardUpEvent   (const SDL_KeyboardEvent*) {}
+        void    onKeyboardDownEvent (const SDL_KeyboardEvent*) {}
+        void    onWindowEvent       (const SDL_WindowEvent*) {}
+        void    onMouseMoveEvent    (const SDL_MouseMotionEvent*) {}
+        void    onMouseButtonEvent  (const SDL_MouseButtonEvent*) {}
+        void    onMouseWheelEvent   (const SDL_MouseWheelEvent*) {}
         
     public:
         singlePlayer();
-        singlePlayer(const singlePlayer&);
-        singlePlayer(singlePlayer&&);
+        singlePlayer(const singlePlayer&) = delete;
+        singlePlayer(singlePlayer&&) = delete;
         
         ~singlePlayer();
         
-        singlePlayer& operator=(const singlePlayer&);
-        singlePlayer& operator=(singlePlayer&&);
+        singlePlayer& operator=(const singlePlayer&) = delete;
+        singlePlayer& operator=(singlePlayer&&) = delete;
         
         void startGame(int difficulty);
         void endGame();
@@ -53,7 +53,7 @@ class singlePlayer : virtual public gameState {
         void stepAnimations();
         void stepGameLogic();
         
-        void draw() const = 0;
+        void draw() const;
         void onTick(float tickTime);
 };
 
