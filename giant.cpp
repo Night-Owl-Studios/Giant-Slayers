@@ -15,13 +15,15 @@ giant::giant() {
     startingHealth = global::pRandGen->randRangeF(_GIANT_MIN_HEALTH, _GIANT_MAX_HEALTH);
 }
 
-giant::giant(const giant& g) {
-    this->operator =(g);
-}
+giant::giant(const giant& g) :
+    player(g),
+    startingHealth(g.startingHealth)
+{}
 
-giant::giant(giant&& g) {
-    this->operator =(std::move(g));
-}
+giant::giant(giant&& g) :
+    player(std::move(g)),
+    startingHealth(g.startingHealth)
+{}
 
 giant::~giant() {
 }
@@ -29,7 +31,7 @@ giant::~giant() {
 /******************************************************************************
  * Giant - Assignment & Movement
 ******************************************************************************/
-giant& giant::operator =(const giant& g) {
+giant& giant::operator=(const giant& g) {
     player::operator    = (g);
     startingHealth      = g.startingHealth;
     return *this;

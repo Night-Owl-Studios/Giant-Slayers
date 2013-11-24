@@ -43,9 +43,9 @@
  * Attack Card Definition Macro
 ******************************************************************************/
 #define _DEFINE_ATTACK_CARD(signature)\
-    void signature::applyTpPlayers(player* pPlayer, player* pEnemy) const {\
+    void signature::applyToPlayers(player* pPlayer, player* pEnemy) const {\
         (void)pPlayer;\
-        pEnemy->attack(pEnemy, getStrengthType(), getStrength());\
+        pEnemy->attack(getStrengthType(), getStrength());\
     }
 
 /******************************************************************************
