@@ -8,17 +8,37 @@
 #include <new>
 #include <iostream>
 #include <utility>
+#include "main.h"
 #include "player.h"
 
 /******************************************************************************
  * Player Constructors
 ******************************************************************************/
 player::player(const player& p) {
-    this->operator=(p);
+    health          = p.health;
+    fortification   = p.fortification;
+    dodgeChance     = p.dodgeChance;
+    strength        = p.strength;
+    activeEffects   = p.activeEffects;
 }
 
 player::player(player&& p) {
-    this->operator =(std::move(p));
+    health          = p.health;
+    p.health        = 1.f;
+    
+    fortification   = p.fortification;
+    p.fortification = _PLAYER_DEFAULT_FORTIFICATION;
+    
+    dodgeChance     = p.dodgeChance;
+    p.dodgeChance   = _PLAYER_DEFAULT_DODGE_CHANCE;
+    
+    strength        = p.strength;
+    p.strength      = _PLAYER_DEFAULT_STRENGTH;
+    
+    activeEffects   = std::move(p.activeEffects);
+    
+    pHand = p.pHand;
+    p.pHand = nullptr;
 }
 
 /******************************************************************************
@@ -50,7 +70,7 @@ player& player::operator=(player&& p) {
     p.dodgeChance   = _PLAYER_DEFAULT_DODGE_CHANCE;
     
     strength        = p.strength;
-    p.strength      = _PLAYER_DEFAULT_STRENTGH;
+    p.strength      = _PLAYER_DEFAULT_STRENGTH;
     
     activeEffects   = std::move(p.activeEffects);
     
@@ -90,31 +110,15 @@ void player::terminate() {
 ******************************************************************************/
 void player::playSelectedCards(player* pEnemy) {
     for (unsigned int i = 0; i < _MAX_CARDS_PER_HAND; ++i) {
-        if (pHand->isCardActive(i) -- false) {
+        if (pHand->isCardActive(i) == false) {
             continue;
         }
         
         card* pCard = pHand->getCard(i);
         pCard->applyToPlayers(this, pEnemy);
-        discardCard(i);
+        pHand->removeCard(i);
     }
 }
-
-/******************************************************************************
- * Player Drawing Cards
-******************************************************************************/
-
-/******************************************************************************
- * Player Selecting cards
-******************************************************************************/
-
-/******************************************************************************
- * Player Deselecting cards
-******************************************************************************/
-
-/******************************************************************************
- * Player Discarding cards from a hand
-******************************************************************************/
 
 /******************************************************************************
  * Player Stats update

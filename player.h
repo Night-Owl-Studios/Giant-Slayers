@@ -17,9 +17,9 @@
  * Player Effects to be used by cards
 ******************************************************************************/
 struct playerEffect {
-    cardAbility effect   = cardAbility::ability_invalid;
-    short duration      = 0;
-    float amount        = 0;
+    cardAbility effect;
+    short duration;
+    float amount;
 };
 
 /******************************************************************************
@@ -72,9 +72,6 @@ class player {
         hand*               getHand             () { return pHand; }
         
         virtual void        playSelectedCards   (player* pEnemy);
-        virtual void        drawCards           (deck* d); // overridden by giants
-        virtual card*       selectCard          (int index) const;
-        virtual void        discardCard         (int index);
         
         const effectList&   getActiveEffects    () const;
         
@@ -127,10 +124,24 @@ inline float player::getDodgeChance() const {
 }
 
 /******************************************************************************
+ * Player - Receiving an attack
+******************************************************************************/
+inline void player::attack(cardStrength, float amount) {
+    health = (global::pRandGen->randRangeF(0.f, 1.f) <= dodgeChance)
+        ? health
+        : health - (amount * (1-fortification));
+}
+
+
+/******************************************************************************
  * Apply effects to players
  *      Should be used by cards or other players directly
 ******************************************************************************/
-inline void player::applyEffect(const playerEffect& pe) {
+inline void player::applyEffect(cardAbility ca, short duration, float amount) {
+    playerEffect pe;
+    pe.effect = ca;
+    pe.duration = duration;
+    pe.amount = amount;
     activeEffects.push_back(pe);
 }
 
