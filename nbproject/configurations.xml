@@ -13,6 +13,7 @@
       <itemPath>deck.h</itemPath>
       <itemPath>display.h</itemPath>
       <itemPath>gameState.h</itemPath>
+      <itemPath>giant.h</itemPath>
       <itemPath>hand.h</itemPath>
       <itemPath>main.h</itemPath>
       <itemPath>player.h</itemPath>
@@ -40,6 +41,7 @@
       <itemPath>deck.cpp</itemPath>
       <itemPath>display.cpp</itemPath>
       <itemPath>gameState.cpp</itemPath>
+      <itemPath>giant.cpp</itemPath>
       <itemPath>hand.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>player.cpp</itemPath>
@@ -58,8 +60,6 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>giant.cpp</itemPath>
-    <itemPath>giant.h</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
