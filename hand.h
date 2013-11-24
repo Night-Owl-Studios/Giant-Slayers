@@ -32,17 +32,17 @@ class hand {
         playableCard cards[_MAX_CARDS_PER_HAND];
 
     public:
-        hand();
-        hand(const hand&) = delete;
-        hand(hand&&) = delete;
+        hand        ();
+        hand        (const hand&);
+        hand        (hand&&);
         
-        ~hand() {clearHand();}
+        ~hand()     {clearHand();}
         
-        hand& operator=(const hand&) = delete;
-        hand& operator=(hand&&) = delete;
+        hand&       operator=           (const hand&);
+        hand&       operator=           (hand&&);
         
-        bool selectCard(unsigned index); // return false if no more cards can be selected
-        void deselectCard(unsigned index);
+        bool        selectCard          (unsigned index); // return false if no more cards can be selected
+        void        deselectCard        (unsigned index);
         
         /*
          * Returns an array of _MAX_CARDS_PER_HAND cards.
@@ -56,15 +56,15 @@ class hand {
         bool        isCardActive        (unsigned index);
         
         /*
-         * Draw "numCards" from a deck at the inclusive offset of "cardIndex"
-         * @return the number of cards drawn from the deck
+         * Draw "numCards" from a deck until the hand is full.
+         * Returns the number of cards drawn, up to _MAX_CARDS_PER_HAND
          */
         unsigned    drawCards           (deck*, unsigned numCards = 1);
         void        removeCard          (unsigned index);
         void        clearHand           ();
         
         unsigned    getNumSelectedCards () const;
-        unsigned    getNumCards         () const { return _MAX_CARDS_PER_HAND; }
+        unsigned    getNumCards         () const;
 };
 
 #endif	/* __GSLAYERS_HAND_H__ */
