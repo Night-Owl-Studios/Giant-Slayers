@@ -19,6 +19,14 @@ enum class deckAbility {
     add_div // Minral
 };
 
+/*
+ * Card Deck Types
+ */
+enum class deckType {
+    aresa_deck,
+    minral_deck
+};
+
 /******************************************************************************
  * Card Deck
  * 
@@ -133,14 +141,5 @@ deck_t<dt, da>& deck_t<dt, da>::operator =(deck_t<dt, da>&& ad) {
     deck::operator =(std::move(ad));
     return *this;
 }
-
-/******************************************************************************
- * Deck Specializations
-******************************************************************************/
-typedef deck_t<deckType::aresa_deck, deckAbility::mul_sub> aresaDeck;
-bool aresaDeck::init();
-
-typedef deck_t<deckType::minral_deck, deckAbility::add_div> minralDeck;
-bool minralDeck::init();
 
 #endif	/* __GSLAYER_CARD_DECK_H__ */

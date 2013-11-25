@@ -11,7 +11,11 @@
 #include <cstdint>
 #include "hamLibs.h"
 
+/******************************************************************************
+ * NAMESPACE SETUP
+******************************************************************************/
 namespace math = hamLibs::math;
+using hamLibs::utils::hashVal_t;
 
 /******************************************************************************
  * GLOBAL MACROS
@@ -29,6 +33,13 @@ namespace math = hamLibs::math;
 
 #ifndef _DEFAULT_DISPLAY_HEIGHT
     #define _DEFAULT_DISPLAY_HEIGHT 480
+#endif
+
+/*
+ * Compile-Time String Hashing
+ */
+#ifndef _GAME_HASH
+    #define _GAME_HASH( x ) hamLibs::utils::hashFNV1<char>( x )
 #endif
 
 /*
@@ -118,10 +129,11 @@ class testState;
  * Game-Specific Enumerations
  */
 enum class deckType; //deck.h
+enum class deckAbility; // deck.h
 enum class cardType; // cardTypes.h
 enum class cardStrength; //cardTypes.h
 enum class cardAbility; // cardTypes.h
-enum class cardEffect; // cardTypes.h
+enum class gameDifficulty; // singlePlayer.h
 
 /*
  * Game-Specific Classes
@@ -131,10 +143,13 @@ class deck;
 class card;
 class giant;
 
-template <const int cost, const cardStrength, const int strengthVal>
+template <deckType, deckAbility>
+class deck_t;
+
+template <hashVal_t hash, const int cost, const cardStrength, const int strengthVal>
 class attackCard;
 
-template <const int cost, const cardAbility, const cardEffect>
+template <hashVal_t hash, const int cost, const cardAbility ca>
 class abilityCard;
 
 /******************************************************************************

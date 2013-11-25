@@ -10,9 +10,10 @@
 /******************************************************************************
  * Aresa Deck Initialization
 ******************************************************************************/
+template <>
 bool aresaDeck::init() {
     if (!deck::init()) {
-        terminate();
+        deck::terminate();
         return false;
     }
     

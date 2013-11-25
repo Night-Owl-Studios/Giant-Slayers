@@ -16,6 +16,7 @@
 ******************************************************************************/
 typedef deck_t<deckType::minral_deck, deckAbility::add_div> minralDeck;
 
+template <>
 bool minralDeck::init();
 
 #endif	/* _GSLAYERS_MINRALDECK_H_ */

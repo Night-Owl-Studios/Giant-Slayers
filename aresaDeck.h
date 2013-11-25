@@ -16,6 +16,7 @@
 ******************************************************************************/
 typedef deck_t<deckType::aresa_deck, deckAbility::mul_sub> aresaDeck;
 
+template <>
 bool aresaDeck::init();
 
 #endif	/* _GSLAYERS_ARESADECK_H_ */

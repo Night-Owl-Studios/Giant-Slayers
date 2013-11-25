@@ -12,12 +12,25 @@
 #include "gameState.h"
 #include "player.h"
 
+/******************************************************************************
+ * Game Difficulty
+******************************************************************************/
+enum class gameDifficulty {
+    easy,
+    medium,
+    hard
+};
+
+/******************************************************************************
+ * Single Player Game-State
+******************************************************************************/
 class singlePlayer : virtual public gameState {
     private:
+        gameDifficulty currDiff = gameDifficulty::easy;
         player* pPlayer         = nullptr;
-        giant* pGiant           = nullptr;
+        giant*  pGiant          = nullptr;
         player* currentPlayer   = nullptr;
-        deck* pDeck             = nullptr;
+        deck*   pDeck           = nullptr;
         
         void    onKeyboardUpEvent   (const SDL_KeyboardEvent*) {}
         void    onKeyboardDownEvent (const SDL_KeyboardEvent*) {}
@@ -36,7 +49,7 @@ class singlePlayer : virtual public gameState {
         singlePlayer& operator=(const singlePlayer&) = delete;
         singlePlayer& operator=(singlePlayer&&) = delete;
         
-        void startGame(int difficulty);
+        void startGame(gameDifficulty difficulty);
         void endGame();
         
         bool init();
@@ -47,8 +60,7 @@ class singlePlayer : virtual public gameState {
         
         void turnEndPhase();
         
-        void attackGiantPhase();
-        void giantAttackPhase();
+        void attackPhase();
         
         void stepAnimations();
         void stepGameLogic();

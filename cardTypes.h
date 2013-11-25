@@ -5,8 +5,8 @@
  * Created on November 19, 2013, 8:54 PM
  */
 
-#ifndef __GSLAYER_CARDEFFECTS_H__
-#define	__GSLAYER_CARDEFFECTS_H__
+#ifndef __GSLAYER_CARDTYPES_H__
+#define	__GSLAYER_CARDTYPES_H__
 
 #include "main.h"
 
@@ -30,15 +30,6 @@ enum class cardAbility {
 };
 
 /*
- * Card Effect Types
- */
-enum class cardEffect {
-    add,
-    subtract,
-    multiply
-};
-
-/*
  * Card Strength Types
  */
 enum class cardStrength {
@@ -48,5 +39,5 @@ enum class cardStrength {
 };
 
 
-#endif	/* __GSLAYER_CARDEFFECTS_H__ */
+#endif	/* __GSLAYER_CARDTYPES_H__ */
 

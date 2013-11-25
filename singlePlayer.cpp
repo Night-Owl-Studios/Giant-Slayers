@@ -8,6 +8,9 @@
 #include <utility>
 #include "singlePlayer.h"
 
+/******************************************************************************
+ * Single Player Constructor & Destructor
+******************************************************************************/
 singlePlayer::singlePlayer() {
 }
 
@@ -15,14 +18,23 @@ singlePlayer::~singlePlayer() {
     terminate();
 }
 
-void singlePlayer::startGame(int difficulty) {
-    (void)difficulty;
+/******************************************************************************
+ * Single Player Game Start
+******************************************************************************/
+void singlePlayer::startGame(gameDifficulty difficulty) {
+    init();
+    currDiff = difficulty;
+    
+    
     /*
      * Allow the player to choose their deck.
      * Determine which giant to play against depending on the difficulty
      */
 }
 
+/******************************************************************************
+ * Single Player Game End
+******************************************************************************/
 void singlePlayer::endGame() {
     /*
      * Print player statistics
@@ -30,15 +42,24 @@ void singlePlayer::endGame() {
      */
 }
 
+/******************************************************************************
+ * Single Player Initialization
+******************************************************************************/
 bool singlePlayer::init() {
     return true;
 }
 
+/******************************************************************************
+ * Single Player Termination
+******************************************************************************/
 void singlePlayer::terminate() {
     delete pPlayer;
     pPlayer = nullptr;
 }
 
+/******************************************************************************
+ * Single Player Card Draw Phase
+******************************************************************************/
 void singlePlayer::drawCardPhase() {
     /*
      * If there are any more remaining cards in the deck, pick one.
@@ -47,6 +68,9 @@ void singlePlayer::drawCardPhase() {
      */
 }
 
+/******************************************************************************
+ * Single Player Card Play Phase
+******************************************************************************/
 void singlePlayer::playCardPhase() {
     /*
      * Allow the player to choose which cards they want to play.
@@ -55,6 +79,9 @@ void singlePlayer::playCardPhase() {
      */
 }
 
+/******************************************************************************
+ * Single Player Turn End Phase
+******************************************************************************/
 void turnEndPhase() {
     /*
      * If it was the player's turn, attackGiantPhase()
@@ -68,7 +95,10 @@ void turnEndPhase() {
      */
 }
 
-void attackGiantPhase() {
+/******************************************************************************
+ * Single Player Attack Phase
+******************************************************************************/
+void attackPhase() {
     /*
      * Count all card statistics.
      * Apply all displayed abilities.
@@ -76,20 +106,18 @@ void attackGiantPhase() {
      */
 }
 
-void singlePlayer::giantAttackPhase() {
-    /*
-     *  Determine attack chance.
-     *  Determine critical chance.
-     *  Attack the player.
-     */
-}
-
+/******************************************************************************
+ * Single Player Animation updating
+******************************************************************************/
 void singlePlayer::stepAnimations() {
     /*
      * Increment the movements of any animations currently displayed.
      */
 }
 
+/******************************************************************************
+ * Single Player Game logic updating
+******************************************************************************/
 void singlePlayer::stepGameLogic() {
     /*
      * Get the current game state.
@@ -97,9 +125,15 @@ void singlePlayer::stepGameLogic() {
      */
 }
 
+/******************************************************************************
+ * Single Player graphics drawing
+******************************************************************************/
 void singlePlayer::draw() const {
 }
 
+/******************************************************************************
+ * Single Player Time passing
+******************************************************************************/
 void singlePlayer::onTick(float tickTime) {
     (void)tickTime;
     /*
