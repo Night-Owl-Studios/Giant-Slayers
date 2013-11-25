@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/abilityCard.o \
 	${OBJECTDIR}/aresaDeck.o \
 	${OBJECTDIR}/attackCard.o \
+	${OBJECTDIR}/boundingBox.o \
 	${OBJECTDIR}/card.o \
 	${OBJECTDIR}/deck.o \
 	${OBJECTDIR}/display.o \
@@ -92,6 +93,11 @@ ${OBJECTDIR}/attackCard.o: attackCard.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -g -Werror -DSDL_MAIN_HANDLED -D_DEBUG -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/attackCard.o attackCard.cpp
+
+${OBJECTDIR}/boundingBox.o: boundingBox.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -g -Werror -DSDL_MAIN_HANDLED -D_DEBUG -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/boundingBox.o boundingBox.cpp
 
 ${OBJECTDIR}/card.o: card.cpp 
 	${MKDIR} -p ${OBJECTDIR}
