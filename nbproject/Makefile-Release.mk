@@ -36,9 +36,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/abilityCard.o \
-	${OBJECTDIR}/abilityTemplates.o \
+	${OBJECTDIR}/aresaDeck.o \
 	${OBJECTDIR}/attackCard.o \
-	${OBJECTDIR}/attackTemplates.o \
 	${OBJECTDIR}/card.o \
 	${OBJECTDIR}/deck.o \
 	${OBJECTDIR}/display.o \
@@ -46,6 +45,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/giant.o \
 	${OBJECTDIR}/hand.o \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/minralDeck.o \
 	${OBJECTDIR}/player.o \
 	${OBJECTDIR}/singlePlayer.o \
 	${OBJECTDIR}/system.o \
@@ -83,20 +83,15 @@ ${OBJECTDIR}/abilityCard.o: abilityCard.cpp
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/abilityCard.o abilityCard.cpp
 
-${OBJECTDIR}/abilityTemplates.o: abilityTemplates.cpp 
+${OBJECTDIR}/aresaDeck.o: aresaDeck.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/abilityTemplates.o abilityTemplates.cpp
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/aresaDeck.o aresaDeck.cpp
 
 ${OBJECTDIR}/attackCard.o: attackCard.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/attackCard.o attackCard.cpp
-
-${OBJECTDIR}/attackTemplates.o: attackTemplates.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/attackTemplates.o attackTemplates.cpp
 
 ${OBJECTDIR}/card.o: card.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -132,6 +127,11 @@ ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/minralDeck.o: minralDeck.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/minralDeck.o minralDeck.cpp
 
 ${OBJECTDIR}/player.o: player.cpp 
 	${MKDIR} -p ${OBJECTDIR}
