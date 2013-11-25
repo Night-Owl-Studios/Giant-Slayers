@@ -17,7 +17,7 @@
 /******************************************************************************
  * Ability Card Class
 ******************************************************************************/
-template <const int cost, const cardAbility ca, const cardEffect ce>
+template <hashVal_t hash, const int cost, const cardAbility ca>
 class abilityCard final : public card {
     private:
         
@@ -43,18 +43,12 @@ class abilityCard final : public card {
         void            applyToPlayers  (player* pPlayer, player* pEnemy) const;
 };
 
-template <const int cost, const cardAbility ca, const cardEffect ce>
-inline const char* abilityCard<cost, ca, ce>::getName() const { return nullptr; }
-
-template <const int cost, const cardAbility ca, const cardEffect ce>
-inline void abilityCard<cost, ca, ce>::applyToPlayers(player* pPlayer, player* pEnemy) const {}
-
 /******************************************************************************
  * Ability Card Registration Macro
 ******************************************************************************/
 #ifndef _DECLARE_ABILITY_CARD
-    #define _DECLARE_ABILITY_CARD(signature, name, ap, ability, effect)\
-        typedef abilityCard<ap, ability, effect> ability_##signature;\
+    #define _DECLARE_ABILITY_CARD(signature, name, ap, ability)\
+        typedef abilityCard<_GAME_HASH(name), ap, ability> ability_##signature;\
         \
         template <> inline const char* ability_##signature::getName() const { return name; }\
         \
@@ -64,14 +58,30 @@ inline void abilityCard<cost, ca, ce>::applyToPlayers(player* pPlayer, player* p
 /******************************************************************************
  * Ability Card Definition Macro
 ******************************************************************************/
-#define _DEFINE_ABILITY_CARD(signature)\
-    template <>\
-    void ability_##signature::applyToPlayers(player* pPlayer, player* pEnemy) const
+#ifndef _DEFINE_ABILITY_CARD
+    #define _DEFINE_ABILITY_CARD(signature)\
+        template <>\
+        void ability_##signature::applyToPlayers(player* pPlayer, player* pEnemy) const
+#endif
 
 /******************************************************************************
  * Ability Card Registrations
 ******************************************************************************/
-_DECLARE_ABILITY_CARD(ambrosia, "Ambrosia", 2, cardAbility::healing, cardEffect::add);
+/*
+ * Healing Cards
+ */
+_DECLARE_ABILITY_CARD(healingSalve, "Healing Salve", 2, cardAbility::healing);
+_DECLARE_ABILITY_CARD(soothingBalm, "Soothing Balm", 2, cardAbility::healing);
+_DECLARE_ABILITY_CARD(rejuvenatingCharm, "Rejuvenating Charm", 2, cardAbility::healing);
+_DECLARE_ABILITY_CARD(curedMeat, "Cured Meat", 2, cardAbility::healing);
+_DECLARE_ABILITY_CARD(ambrosia, "Ambrosia", 2, cardAbility::healing);
+
+/*
+ * Damage Mitigation
+ */
+_DECLARE_ABILITY_CARD(deflectedHit, "Deflected Hit", 1, cardAbility::damage_mitigation);
+_DECLARE_ABILITY_CARD(quickReaction, "Quick Reaction", 1, cardAbility::damage_mitigation);
+_DECLARE_ABILITY_CARD(adrenalineRush, "Adrenaline Rush", 1, cardAbility::damage_mitigation);
 
 #endif	/* __GSLAYER_ABILITYCARD_H__ */
 

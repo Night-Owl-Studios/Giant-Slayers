@@ -16,7 +16,7 @@
 /******************************************************************************
  * Attack Card Class
 ******************************************************************************/
-template <const int cost, const cardStrength cs, const int strengthVal>
+template <hashVal_t hash, const int cost, const cardStrength cs, const int strengthVal>
 class attackCard final : public card {
     public:
         attackCard      ()                            = default;
@@ -47,27 +47,42 @@ class attackCard final : public card {
  * NOTE:
  * The function "applyToPlayer()" still needs to be defined for all card types
 ******************************************************************************/
-#define _DECLARE_ATTACK_CARD(signature, name, ap, strength, val, flavor)\
-    typedef attackCard<ap, strength, val> attack_##signature;\
-    \
-    template <> inline const char* attack_##signature::getName() const { return name; }\
-    template <> inline const char* attack_##signature::getFlavor() const { return flavor; }\
-    template <> void attack_##signature::applyToPlayers(player* pPlayer, player* pEnemy) const
+#ifndef _DECLARE_ATTACK_CARD
+    #define _DECLARE_ATTACK_CARD(signature, name, ap, strength, val, flavor)\
+        typedef attackCard<_GAME_HASH(name), ap, strength, val> attack_##signature;\
+        \
+        template <> inline const char* attack_##signature::getName() const { return name; }\
+        template <> inline const char* attack_##signature::getFlavor() const { return flavor; }\
+        template <> void attack_##signature::applyToPlayers(player* pPlayer, player* pEnemy) const
+#endif
 
 /******************************************************************************
  * Attack Card Definition Macro
 ******************************************************************************/
-#define _DEFINE_ATTACK_CARD(signature)\
-    template <>\
-    void attack_##signature::applyToPlayers(player* pPlayer, player* pEnemy) const {\
-        (void)pPlayer;\
-        pEnemy->attack(getStrengthType(), getStrength());\
-    }
+#ifndef _DEFINE_ATTACK_CARD
+    #define _DEFINE_ATTACK_CARD(signature)\
+        template <>\
+        void attack_##signature::applyToPlayers(player* pPlayer, player* pEnemy) const {\
+            (void)pPlayer;\
+            pEnemy->attack(getStrengthType(), getStrength());\
+        }
+#endif
 
 /******************************************************************************
  * Attack Card Registrations
 ******************************************************************************/
-_DECLARE_ATTACK_CARD(furyStrike, "Fury Strike", 2, cardStrength::heavy, 700, "FURY_STRIKE");
+/*
+ * Aresa's Attacks
+ */
+_DECLARE_ATTACK_CARD(quickSlash, "Quick Slash", 1, cardStrength::normal, 200, "QUICK_SLASH");
+_DECLARE_ATTACK_CARD(tripleStrike, "Triple Sword Strike", 1, cardStrength::heavy, 650, "TRIPLE_SWORD_STRIKE");
+_DECLARE_ATTACK_CARD(furyStrike, "Fury Strike", 2, cardStrength::ultimate, 700, "FURY_STRIKE");
+_DECLARE_ATTACK_CARD(deadlySlash, "Deadly Slash", 2, cardStrength::ultimate, 725, "DEADLY_SLASH");
+
+/*
+ * Minral's attacks
+ */
+_DECLARE_ATTACK_CARD(piercingShot, "Piercing Shot", 1, cardStrength::normal, 300, "PIERCING_SHOT");
 
 #endif	/* __GSLAYER_ATTACKCARD_H__ */
 

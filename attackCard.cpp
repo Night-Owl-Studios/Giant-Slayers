@@ -11,5 +11,15 @@
 /******************************************************************************
  * Attack Card Definitions
 ******************************************************************************/
+/*
+ * Aresa's Cards
+ */
+_DEFINE_ATTACK_CARD(quickSlash)
+_DEFINE_ATTACK_CARD(tripleStrike)
 _DEFINE_ATTACK_CARD(furyStrike)
+_DEFINE_ATTACK_CARD(deadlySlash)
 
+/*
+ * Minral's Cards
+ */
+_DEFINE_ATTACK_CARD(piercingShot)
