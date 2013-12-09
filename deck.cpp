@@ -6,7 +6,6 @@
  */
 
 #include <new>
-#include <utility>
 #include "deck.h"
 #include "card.h"
 
@@ -56,6 +55,7 @@ deck::deck(deck&& cd) {
  * Card Deck Initialization
 ******************************************************************************/
 deck::~deck() {
+    terminate();
 }
 
 /******************************************************************************

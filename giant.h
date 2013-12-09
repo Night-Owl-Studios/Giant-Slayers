@@ -14,6 +14,7 @@
 class giant : virtual public player {
     private:
         mutable float startingHealth; // Shouldn't change unless the giant is copied
+        card* pCard = nullptr;
         
     public:
         giant       ();

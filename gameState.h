@@ -11,6 +11,7 @@
 // Forward declarations
 struct SDL_WindowEvent;
 struct SDL_KeyboardEvent;
+struct SDL_TextInputEvent;
 struct SDL_MouseMotionEvent;
 struct SDL_MouseButtonEvent;
 struct SDL_MouseWheelEvent;
@@ -33,10 +34,12 @@ class gameState {
         
         virtual void onKeyboardUpEvent(const SDL_KeyboardEvent*) = 0;
         virtual void onKeyboardDownEvent(const SDL_KeyboardEvent*) = 0;
+        virtual void onKeyboardTextEvent(const SDL_TextInputEvent*) = 0;
         virtual void onWindowEvent(const SDL_WindowEvent*) = 0;
         
         virtual void onMouseMoveEvent(const SDL_MouseMotionEvent*) = 0;
-        virtual void onMouseButtonEvent(const SDL_MouseButtonEvent*) = 0;
+        virtual void onMouseButtonUpEvent(const SDL_MouseButtonEvent*) = 0;
+        virtual void onMouseButtonDownEvent(const SDL_MouseButtonEvent*) = 0;
         virtual void onMouseWheelEvent(const SDL_MouseWheelEvent*) = 0;
         
     public:

@@ -17,8 +17,7 @@
 class subsystem {
     private:
         bool gameIsRunning = false;
-        Uint64 prevTime = 0u;
-        double tickTime = 0.f;
+        float tickTime = 0.f;
         std::vector<gameState*> gameStack;
     
     public:

@@ -129,7 +129,7 @@ void testState::onMouseMoveEvent(const SDL_MouseMotionEvent* pEvent) {
 /******************************************************************************
  * Mouse Button Event
 ******************************************************************************/
-void testState::onMouseButtonEvent(const SDL_MouseButtonEvent* pEvent) {
+void testState::onMouseButtonDownEvent(const SDL_MouseButtonEvent* pEvent) {
     if (pEvent->state != SDL_PRESSED) {
         return;
     }

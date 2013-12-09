@@ -40,6 +40,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/attackCard.o \
 	${OBJECTDIR}/boundingBox.o \
 	${OBJECTDIR}/card.o \
+	${OBJECTDIR}/dealer.o \
 	${OBJECTDIR}/deck.o \
 	${OBJECTDIR}/display.o \
 	${OBJECTDIR}/gameState.o \
@@ -67,7 +68,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lSDL2 -lSDL2_image ../hamlibs/HamLibs_NetBeans/../bin/WIN32/libhamlibs.a
+LDLIBSOPTIONS=-lSDL2 -lSDL2_image -lSDL2_ttf ../hamlibs/HamLibs_NetBeans/../bin/WIN32/libhamlibs.a
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -81,83 +82,88 @@ bin/GSlayers.exe: ${OBJECTFILES}
 
 ${OBJECTDIR}/abilityCard.o: abilityCard.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/abilityCard.o abilityCard.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/abilityCard.o abilityCard.cpp
 
 ${OBJECTDIR}/aresaDeck.o: aresaDeck.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/aresaDeck.o aresaDeck.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/aresaDeck.o aresaDeck.cpp
 
 ${OBJECTDIR}/attackCard.o: attackCard.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/attackCard.o attackCard.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/attackCard.o attackCard.cpp
 
 ${OBJECTDIR}/boundingBox.o: boundingBox.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/boundingBox.o boundingBox.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/boundingBox.o boundingBox.cpp
 
 ${OBJECTDIR}/card.o: card.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/card.o card.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/card.o card.cpp
+
+${OBJECTDIR}/dealer.o: dealer.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/dealer.o dealer.cpp
 
 ${OBJECTDIR}/deck.o: deck.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/deck.o deck.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/deck.o deck.cpp
 
 ${OBJECTDIR}/display.o: display.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/display.o display.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/display.o display.cpp
 
 ${OBJECTDIR}/gameState.o: gameState.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/gameState.o gameState.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/gameState.o gameState.cpp
 
 ${OBJECTDIR}/giant.o: giant.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/giant.o giant.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/giant.o giant.cpp
 
 ${OBJECTDIR}/hand.o: hand.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/hand.o hand.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/hand.o hand.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/minralDeck.o: minralDeck.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/minralDeck.o minralDeck.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/minralDeck.o minralDeck.cpp
 
 ${OBJECTDIR}/player.o: player.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/player.o player.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/player.o player.cpp
 
 ${OBJECTDIR}/singlePlayer.o: singlePlayer.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/singlePlayer.o singlePlayer.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/singlePlayer.o singlePlayer.cpp
 
 ${OBJECTDIR}/system.o: system.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/system.o system.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/system.o system.cpp
 
 ${OBJECTDIR}/testState.o: testState.cpp 
 	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF $@.d -o ${OBJECTDIR}/testState.o testState.cpp
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -Werror -s -DSDL_MAIN_HANDLED -I../hamlibs/include -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/testState.o testState.cpp
 
 # Subprojects
 .build-subprojects:

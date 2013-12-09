@@ -21,23 +21,30 @@ enum class gameDifficulty {
     hard
 };
 
+struct _TTF_Font;
+struct SDL_Texture;
+
 /******************************************************************************
  * Single Player Game-State
 ******************************************************************************/
-class singlePlayer : virtual public gameState {
+class singlePlayer final : virtual public gameState {
     private:
+        _TTF_Font* pFont        = nullptr;
+        SDL_Texture* pTexture   = nullptr;
         gameDifficulty currDiff = gameDifficulty::easy;
         player* pPlayer         = nullptr;
         giant*  pGiant          = nullptr;
         player* currentPlayer   = nullptr;
         deck*   pDeck           = nullptr;
         
-        void    onKeyboardUpEvent   (const SDL_KeyboardEvent*) {}
-        void    onKeyboardDownEvent (const SDL_KeyboardEvent*) {}
-        void    onWindowEvent       (const SDL_WindowEvent*) {}
-        void    onMouseMoveEvent    (const SDL_MouseMotionEvent*) {}
-        void    onMouseButtonEvent  (const SDL_MouseButtonEvent*) {}
-        void    onMouseWheelEvent   (const SDL_MouseWheelEvent*) {}
+        void    onKeyboardUpEvent       (const SDL_KeyboardEvent*);
+        void    onKeyboardDownEvent     (const SDL_KeyboardEvent*);
+        void    onKeyboardTextEvent     (const SDL_TextInputEvent*);
+        void    onWindowEvent           (const SDL_WindowEvent*);
+        void    onMouseMoveEvent        (const SDL_MouseMotionEvent*);
+        void    onMouseButtonUpEvent    (const SDL_MouseButtonEvent*);
+        void    onMouseButtonDownEvent  (const SDL_MouseButtonEvent*);
+        void    onMouseWheelEvent       (const SDL_MouseWheelEvent*);
         
     public:
         singlePlayer();

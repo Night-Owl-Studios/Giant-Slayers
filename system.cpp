@@ -44,7 +44,6 @@ void subsystem::terminate() {
         SDL_Quit();
     }
     
-    prevTime = 0u;
     tickTime = 0.f;
     gameIsRunning = false;
     gameStack.clear();
@@ -54,6 +53,9 @@ void subsystem::terminate() {
  * SubSystem Running
 ******************************************************************************/
 void subsystem::run() {
+    Uint64 prevTime = 0u;
+    float frameCounter = 0.f;
+    bool redraw = false;
     gameIsRunning = true;
     
     while (gameIsRunning && gameStack.size()) {
@@ -66,11 +68,18 @@ void subsystem::run() {
         }
         
         /*
-         * Update the game timer
+         * Frame Time Management
          */
         const Uint64 currTime = SDL_GetPerformanceCounter();
-        tickTime = (double)(currTime - prevTime)/(double)SDL_GetPerformanceFrequency();
+        tickTime = (float)(currTime-prevTime)/(float)SDL_GetPerformanceFrequency();
         prevTime = currTime;
+        frameCounter += tickTime;
+        
+        if (frameCounter >= 1.f/60.f) {
+            std::cout << "Frame Time (ms/f): " << frameCounter << "\t\t\r";
+            redraw = true;
+            frameCounter = 0;
+        }
         
         /*
          * Hardware events passed through SDL
@@ -87,13 +96,18 @@ void subsystem::run() {
                 break;
             case SDL_KEYDOWN:
                 pState->onKeyboardDownEvent(&pEvent.key);
+                //break;
+            case SDL_TEXTINPUT:
+                pState->onKeyboardTextEvent(&pEvent.text);
                 break;
             case SDL_MOUSEMOTION:
                 pState->onMouseMoveEvent(&pEvent.motion);
                 break;
             case SDL_MOUSEBUTTONUP:
+                pState->onMouseButtonUpEvent(&pEvent.button);
+                break;
             case SDL_MOUSEBUTTONDOWN:
-                pState->onMouseButtonEvent(&pEvent.button);
+                pState->onMouseButtonDownEvent(&pEvent.button);
                 break;
             case SDL_MOUSEWHEEL:
                 pState->onMouseWheelEvent(&pEvent.wheel);
@@ -120,11 +134,13 @@ void subsystem::run() {
         /*
          * Render to the screen after all events have been processed
          */
-        if (!SDL_PollEvent(&pEvent)) {
+        //if (!SDL_PollEvent(&pEvent) && redraw) {
+        if (!SDL_WaitEventTimeout(&pEvent, 1) && redraw) {
             for (unsigned int i = 0; i < gameStack.size(); ++i) {
                 gameStack[i]->draw();
             }
             global::pDisplay->flip();
+            redraw = false;
         }
     }
 }

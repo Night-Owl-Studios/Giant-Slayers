@@ -8,7 +8,7 @@
 #include <iostream>
 #include "main.h"
 #include "system.h"
-#include "testState.h"
+#include "singlePlayer.h"
 
 /**
  * Simple Weekend Game #1
@@ -58,10 +58,10 @@ bool startGame(int argc, char** argv) {
         return false;
     }
     
-    pState = new(std::nothrow) testState();
+    pState = new(std::nothrow) singlePlayer();
     if (!pState || !pState->init()) {
         std::cerr << "ERROR: Unable to create a runnable test environment." << std::endl;
-        global::pSystem->terminate();
+        pState->terminate();
         return false;
     }
     

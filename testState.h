@@ -22,10 +22,12 @@ class testState final : virtual public gameState {
         
         void onKeyboardUpEvent(const SDL_KeyboardEvent*);
         void onKeyboardDownEvent(const SDL_KeyboardEvent*);
+        void onKeyboardTextEvent(const SDL_TextInputEvent*) {}
         void onWindowEvent(const SDL_WindowEvent*);
         
         void onMouseMoveEvent(const SDL_MouseMotionEvent*);
-        void onMouseButtonEvent(const SDL_MouseButtonEvent*);
+        void onMouseButtonUpEvent(const SDL_MouseButtonEvent*) {}
+        void onMouseButtonDownEvent(const SDL_MouseButtonEvent*);
         void onMouseWheelEvent(const SDL_MouseWheelEvent*);
 
     public:

@@ -6,6 +6,7 @@
  */
 
 #include <utility>
+#include "card.h"
 #include "hand.h"
 #include "deck.h"
 
@@ -28,7 +29,7 @@ hand::hand(hand&& h) {
 ******************************************************************************/
 hand& hand::operator =(const hand& h) {
     for (unsigned i = 0; i < _MAX_CARDS_PER_HAND; ++i) {
-        cards[i] = h.cards[i];
+        cards[i] = h.cards[i]->clone();
     }
     return *this;
 }
@@ -36,117 +37,54 @@ hand& hand::operator =(const hand& h) {
 hand& hand::operator =(hand&& h) {
     for (unsigned i = 0; i < _MAX_CARDS_PER_HAND; ++i) {
         cards[i] = h.cards[i];
-        h.cards[i].isActive = false;
-        h.cards[i].pCard = nullptr;
+        h.cards[i] = nullptr;
     }
     return *this;
 }
 
-/******************************************************************************
- * Hand - Card Selection
-******************************************************************************/
-bool hand::selectCard(unsigned index) {
-    #ifdef _DEBUG
-        HL_ASSERT(index < _MAX_CARDS_PER_HAND);
-        HL_ASSERT(cards[index].pCard != nullptr);
-    #endif
-    
-    return cards[index].isActive = true;
-}
-
-/******************************************************************************
- * Hand - Card Deselection
-******************************************************************************/
-void hand::deselectCard(unsigned index) {
-    #ifdef _DEBUG
-        HL_ASSERT(index < _MAX_CARDS_PER_HAND);
-        HL_ASSERT(cards[index].pCard != nullptr);
-    #endif
-    
-    cards[index].isActive = false;
-}
-
-/******************************************************************************
- * Hand - Active Card Acquisition
-******************************************************************************/
-void hand::getSelectedCards(card* cardArray[_MAX_CARDS_PER_HAND]) {
-    unsigned i = 0;
-    unsigned j = 0;
-    unsigned k = _MAX_CARDS_PER_HAND-1;
-    
-    while (i <= k) {
-        cards[i].isActive
-            ? cardArray[j++] = cards[i].pCard
-            : cardArray[k--] = nullptr;
-        ++i;
-    }
-}
-
-/******************************************************************************
- * Hand - Card Acquisition
-******************************************************************************/
-void hand::getCards(card* cardArray[_MAX_CARDS_PER_HAND]) {
-    unsigned i = 0;
-    unsigned j = 0;
-    unsigned k = _MAX_CARDS_PER_HAND-1;
-    
-    while (i <= k) {
-        cards[i].pCard != nullptr
-            ? cardArray[j++] = cards[i].pCard
-            : cardArray[k--] = nullptr;
-        ++i;
-    }
-}
 
 /******************************************************************************
  * Hand - Individual Card Acquisition
 ******************************************************************************/
-card* hand::getCard(unsigned index) {
+const card* hand::getCard(unsigned index) {
     #ifdef _DEBUG
         HL_ASSERT(index < _MAX_CARDS_PER_HAND);
     #endif
 
-    return cards[index].pCard;
+    return cards[index];
 }
 
 /******************************************************************************
- * Hand - Individual Card Information
+ * Hand - Adding a card by index
 ******************************************************************************/
-bool hand::isCardActive(unsigned index) {
+void hand::setCard(unsigned index, card* pCard) {
     #ifdef _DEBUG
         HL_ASSERT(index < _MAX_CARDS_PER_HAND);
-        HL_ASSERT(cards[index].pCard != nullptr);
     #endif
     
-    return cards[index].isActive;
-}
-
-/******************************************************************************
- * Hand - Drawing from a deck
-******************************************************************************/
-unsigned hand::drawCards(deck* d, unsigned numCards) {
-    #ifdef _DEBUG
-        HL_ASSERT(d != nullptr);
-        HL_ASSERT(numCards <= _MAX_CARDS_PER_HAND);
-    #endif
-    
-    if (!numCards) {
-        return 0;
+    if (pCard == nullptr) {
+        removeCard(index);
+        return;
     }
     
-    unsigned cardsDrawn = 0;
+    if (cards[index] == nullptr && pCard != nullptr) {
+        addCard(pCard);
+    }
+    else {
+        cards[index] = pCard;
+    }
+}
+
+/******************************************************************************
+ * Hand - Adding a card
+******************************************************************************/
+void hand::addCard(card* pCard) {
     for (unsigned i = 0; i < _MAX_CARDS_PER_HAND; ++i) {
-        if (!cards[i].pCard) {
-            cards[i].pCard = d->pullCard();
-            cards[i].isActive = false;
-            
-            cardsDrawn += (cards[i].pCard != nullptr)
-                ? 1
-                : 0;
+        if (cards[i] == nullptr) {
+            cards[i] = pCard;
+            break;
         }
     }
-    
-    return cardsDrawn;
 }
 
 /******************************************************************************
@@ -157,8 +95,23 @@ void hand::removeCard(unsigned index) {
         HL_ASSERT(index < _MAX_CARDS_PER_HAND);
     #endif
     
-    cards[index].isActive = false;
-    cards[index].pCard = nullptr;
+    if (cards[index] == nullptr) {
+        return;
+    }
+    
+    if (index == _MAX_CARDS_PER_HAND-1) {
+        cards[index] = nullptr;
+        return;
+    }
+    
+    // make sure that there is a contiguous array of non-null pointers
+    for (unsigned i = index, j = index+1; i < _MAX_CARDS_PER_HAND; ++i, ++j) {
+        if (cards[j] == nullptr && cards[i] == nullptr) {
+            break;
+        }
+        
+        cards[i] = cards[j];
+    }
 }
 
 /******************************************************************************
@@ -166,22 +119,8 @@ void hand::removeCard(unsigned index) {
 ******************************************************************************/
 void hand::clearHand() {
     for (unsigned i = 0; i < _MAX_CARDS_PER_HAND; ++i) {
-        removeCard(i);
+        cards[i] = nullptr;
     }
-}
-
-/******************************************************************************
- * Hand - Card Selection information
-******************************************************************************/
-unsigned hand::getNumSelectedCards() const {
-    unsigned numSelectedCards = 0;
-    for (unsigned i = 0; i < _MAX_CARDS_PER_HAND; ++i) {
-        if (cards[i].isActive == true) {
-            ++numSelectedCards;
-        }
-    }
-    
-    return numSelectedCards;
 }
 
 /******************************************************************************
@@ -190,8 +129,11 @@ unsigned hand::getNumSelectedCards() const {
 unsigned hand::getNumCards() const {
     unsigned numCards = 0;
     for (unsigned i = 0; i < _MAX_CARDS_PER_HAND; ++i) {
-        if (cards[i].pCard != nullptr) {
+        if (cards[i] != nullptr) {
             ++numCards;
+        }
+        else {
+            break;
         }
     }
     

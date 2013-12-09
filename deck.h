@@ -59,7 +59,6 @@ class deck {
         
         void                shuffle             ();
         
-        // Overloading the subscript operator might get confusing
         card*               pullCard            (); // increments numCardsLeft
         card*               getCard             (unsigned index) const;
 };

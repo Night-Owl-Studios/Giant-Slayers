@@ -7,17 +7,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/singlePlayer.cpp</file>
-            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/main.h</file>
+            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/card.cpp</file>
             <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/hand.h</file>
-            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/giant.cpp</file>
+            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/dealer.cpp</file>
             <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/player.cpp</file>
             <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/hand.cpp</file>
-            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/gameState.cpp</file>
-            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/singlePlayer.h</file>
-            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/gameState.h</file>
+            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/deck.cpp</file>
+            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/card.h</file>
+            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/dealer.h</file>
             <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/player.h</file>
-            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/giant.h</file>
+            <file>file:/C:/Users/hammy/C++/projects/Giant_Slayers/deck.h</file>
         </group>
     </open-files>
 </project-private>

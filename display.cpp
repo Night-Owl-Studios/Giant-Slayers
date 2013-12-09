@@ -9,6 +9,7 @@
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include "display.h"
 
 /******************************************************************************
@@ -66,7 +67,18 @@ bool display::init(const math::vec2i inResolution, bool isFullScreen) {
     const int imgFlags = IMG_INIT_JPG | IMG_INIT_PNG | IMG_INIT_TIF;
     if ((IMG_Init(imgFlags)&imgFlags) != imgFlags) {
         std::cerr
-            << "Warning: Unable to initialize JPG, PNG, and TIF image loaders."
+            << "Warning: Unable to initialize JPG, PNG, and TIF image loaders.\n"
+            << IMG_GetError()
+            << std::endl;
+    }
+    
+    /*
+     * Initialize the TTF addon
+     */
+    if (TTF_Init() < 0) {
+        std::cerr
+            << "Warning: Unable to initialize the TTF add-on.\n"
+            << TTF_GetError()
             << std::endl;
     }
     
@@ -83,6 +95,7 @@ bool display::init(const math::vec2i inResolution, bool isFullScreen) {
  * Display Termination
 ******************************************************************************/
 void display::terminate() {
+    TTF_Quit();
     IMG_Quit();
     
     if (pRenderer) {
