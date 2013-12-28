@@ -6,6 +6,7 @@
  */
 
 #include <utility>
+#include <iostream>
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_ttf.h>
@@ -13,6 +14,7 @@
 #include <SDL2/SDL_keyboard.h>
 #include "singlePlayer.h"
 #include "display.h"
+#include "dealer.h"
 
 /******************************************************************************
  * Single Player Constructor & Destructor
@@ -125,6 +127,29 @@ void singlePlayer::startGame(gameDifficulty difficulty) {
      * Allow the player to choose their deck.
      * Determine which giant to play against depending on the difficulty
      */
+    int selection = 0;
+    deckType selectionType;
+    while (selection != 1 || selection != 2) {
+        std::cout
+            << "Select your deck:\n\t"
+            << "1: Aresa\n\t"
+            << "2: Minral\n\t"
+            << "3: Quit\n"
+            << std::endl;
+        std::cin >> selection;
+    }
+    
+    if (selection == 1) {
+        selectionType = aresa_deck;
+    }
+    else if (selection == 2) {
+        selectionType = minral_deck;
+    }
+    else {
+        currentState = GAME_STOPPED;
+    }
+    
+    playerDealer.init(selectionType);
 }
 
 /******************************************************************************
@@ -172,8 +197,12 @@ void singlePlayer::terminate() {
     pTexture = nullptr;
     TTF_CloseFont(pFont);
     pFont = nullptr;
+    delete pGiant;
+    pGiant = nullptr;
     delete pPlayer;
     pPlayer = nullptr;
+    
+    playerDealer.terminate();
 }
 
 /******************************************************************************

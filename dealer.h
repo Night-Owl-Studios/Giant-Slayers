@@ -18,26 +18,23 @@ class dealer {
         deck* pDeck = nullptr;
         
     public:
-        dealer          () {}
-        dealer          (const dealer&) = delete;
-        dealer          (dealer&&) = delete;
+        dealer      () {}
+        dealer      (const dealer&) = delete;
+        dealer      (dealer&&) = delete;
         
-        virtual ~dealer () {}
+        ~dealer     () {}
         
-        dealer&         operator=   (const dealer&) = delete;
-        dealer&         operator=   (dealer&&) = delete;
+        dealer&     operator=   (const dealer&) = delete;
+        dealer&     operator=   (dealer&&) = delete;
         
-        virtual bool    init        () = 0;
-        void            terminate   ();
+        bool        init        (deckType);
+        void        terminate   ();
         
-        void            shuffle     ();
-        bool            canDeal     ();
-        void            deal        (player* p);
-};
-
-template <typename deckType>
-class dealer_t {
-    
+        void        shuffle     ();
+        bool        canDeal     ();
+        void        deal        (player* p);
+        
+        const deck* getDeck     () const {return pDeck;}
 };
 
 #endif	/* __GSLAYERS_DEALER_H__ */

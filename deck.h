@@ -34,16 +34,16 @@ enum class deckType {
  *  It is the responsibility of derived objects to populate their deck arrays
 ******************************************************************************/
 class deck {
-    private:
+    protected:
         unsigned drawOffset = 0;
         card** pCards = nullptr; // Array of 50 cards
         
     public:
-        deck() {}
-        deck(const deck&);
-        deck(deck&&);
+        deck                () {}
+        deck                (const deck&);
+        deck                (deck&&);
         
-        virtual ~deck() = 0;
+        virtual ~deck       () = 0;
         
         deck&               operator=           (const deck&);
         deck&               operator=           (deck&&);
@@ -59,7 +59,7 @@ class deck {
         
         void                shuffle             ();
         
-        card*               pullCard            (); // increments numCardsLeft
+        card*               pullCard            (); // increments drawOffset
         card*               getCard             (unsigned index) const;
 };
 

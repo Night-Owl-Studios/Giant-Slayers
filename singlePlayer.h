@@ -35,7 +35,7 @@ class singlePlayer final : virtual public gameState {
         player* pPlayer         = nullptr;
         giant*  pGiant          = nullptr;
         player* currentPlayer   = nullptr;
-        deck*   pDeck           = nullptr;
+        dealer  playerDealer;
         
         void    onKeyboardUpEvent       (const SDL_KeyboardEvent*);
         void    onKeyboardDownEvent     (const SDL_KeyboardEvent*);
